@@ -1,0 +1,30 @@
+{
+    "name": "bottledcode/swytch-framework-todo",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Bottledcode\\SwytchFrameworkTodo\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Robert Landers",
+            "email": "landers.robert@gmail.com"
+        }
+    ],
+    "require": {
+        "bottledcode/swytch-framework": "dev-main",
+        "php-di/php-di": "dev-master"
+    }
+    ,
+    "require-dev": {
+        "roave/security-advisories": "dev-latest"
+    },
+    "minimum-stability": "dev",
+    "config": {
+        "allow-plugins": {
+            "olvlvl/composer-attribute-collector": true
+        }
+    }
+}
