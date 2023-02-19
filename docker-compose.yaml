@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  frankenphp:
+    image: todo
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      - 80:80
+      - 443:443
