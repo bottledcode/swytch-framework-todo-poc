@@ -1,11 +1,11 @@
 FROM dunglas/frankenphp AS server
 
-RUN install-php-extensions @composer intl xdebug
+RUN install-php-extensions @composer intl
 
 COPY composer.json composer.lock ./
 
-RUN COMPOSER_ALLOW_SUPERUSER=1 composer install -o --no-dev -n && \
-    echo xdebug.client_host=172.22.192.1 >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN COMPOSER_ALLOW_SUPERUSER=1 composer install -o --no-dev -n # && \
+    #echo xdebug.client_host=172.22.192.1 >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 COPY src public ./
 

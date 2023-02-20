@@ -6,50 +6,58 @@ use Bottledcode\SwytchFramework\Router\Attributes\Route;
 use Bottledcode\SwytchFramework\Router\Method;
 use Bottledcode\SwytchFramework\Template\Attributes\Component;
 use Bottledcode\SwytchFramework\Template\Compiler;
-use Bottledcode\SwytchFramework\Template\Traits\Callbacks;
+use Bottledcode\SwytchFramework\Template\Enum\HtmxSwap;
+use Bottledcode\SwytchFramework\Template\Traits\Htmx;
+use Bottledcode\SwytchFramework\Template\Traits\Refs;
 use Bottledcode\SwytchFrameworkTodo\Models\NewTodo;
+use Bottledcode\SwytchFrameworkTodo\Repository\TodoRepository;
 
 #[Component('App')]
 class App
 {
-	use Callbacks;
-
-	private array $todos = [];
+	use Htmx;
+	use Refs;
 
 	#[Route(Method::POST, '/api/todo')]
 	public function createTodo(NewTodo $todo, array $state, string $target_id): string
 	{
-		$this->todos[] = $todo->todo;
-		file_put_contents('/tmp/todos.json', json_encode($this->todos));
+		$id = $this->todoRepository->add(new \Bottledcode\SwytchFrameworkTodo\Models\TodoItem($todo->todo, false));
+		$this->todoRepository->save();
+		if($this->todoRepository->count() === 1) {
+			return $this->rerender($target_id, $state, '<Counter asOOB="true" />');
+		}
 
-		return $this->rerender($target_id, $state);
+		$this->retarget('.todo-list');
+		$this->reswap(HtmxSwap::BeforeEnd);
+
+		return $this->html(<<<HTML
+<input name="todo" class="new-todo" required placeholder="What needs to be done?" autofocus hx-swap-oob="true" id="new-todo">
+<Counter id="counter" hx-swap-oob="true"></Counter>
+<TodoItem todo="{$todo->todo}" completed="" key="{$id}" />
+HTML);
 	}
 
-	public function __construct(private Compiler $compiler) {
-		if(!file_exists('/tmp/todos.json')) {
-			file_put_contents('/tmp/todos.json', json_encode(['@!example todo']));
-		}
-		$this->todos = json_decode(file_get_contents('/tmp/todos.json'), true);
+	public function __construct(private Compiler $compiler, private TodoRepository $todoRepository)
+	{
 	}
 
 	public function render(string $show)
 	{
-		$todoItems = array_map(fn($todo, $idx) => <<<HTML
-<TodoItem key="{{$idx}}" value="{{$todo}}" />
-HTML, $this->todos, array_keys($this->todos));
+		$hasTodos = $this->todoRepository->count() ? <<<HTML
+<main filter="{{$show}}" ></main>
+<footer class="footer" filter="{{$show}}"></footer>
+HTML : '';
 
-		$todoItems = implode("\n", $todoItems);
 
 		return <<<HTML
 <section class="todoapp">
 	<header class="header">
 		<h1>todos</h1>
 		<form hx-post="/api/todo">
-			<input type="hidden" name="csrf" value="{{csrf}}" >
-			<input name="todo" class="new-todo" required placeholder="What needs to be done?" autofocus>
+			<input id="new-todo" name="todo" class="new-todo" required placeholder="What needs to be done?" autofocus>
 		</form>
 	</header>
-	$todoItems
+	$hasTodos
 </section>
 HTML;
 	}
