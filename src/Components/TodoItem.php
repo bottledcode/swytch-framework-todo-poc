@@ -10,6 +10,7 @@ use Bottledcode\SwytchFramework\Template\Compiler;
 use Bottledcode\SwytchFramework\Template\Enum\HtmxSwap;
 use Bottledcode\SwytchFramework\Template\Traits\FancyClasses;
 use Bottledcode\SwytchFramework\Template\Traits\Htmx;
+use Bottledcode\SwytchFramework\Template\Traits\RegularPHP;
 use Bottledcode\SwytchFrameworkTodo\Models\TodoItem as TodoItemModel;
 use Bottledcode\SwytchFrameworkTodo\Repository\TodoRepository;
 
@@ -18,6 +19,7 @@ class TodoItem
 {
 	use FancyClasses;
 	use Htmx;
+	use RegularPHP;
 
 	public function __construct(private TodoRepository $todos, private Compiler $compiler)
 	{
@@ -35,7 +37,7 @@ class TodoItem
 		return $this->rerender(
 			$target_id,
 			['todo' => $previous->todo, 'completed' => !$previous->completed, 'key' => $id],
-			"<Counter hx-swap-oob='true' id='counter' />"
+			prependHtml: "<Counter hx-swap-oob='true' id='counter' />"
 		);
 	}
 
@@ -60,24 +62,34 @@ class TodoItem
 	{
 		$this->todos->update($id, new TodoItemModel($todo->todo, $this->todos->get($id)->completed));
 		$this->todos->save();
-		return $this->rerender($target_id, [...$state, 'completed' => $todo->completed, 'todo' => $todo->todo, 'editing' => false]);
+		return $this->rerender(
+			$target_id,
+			[...$state, 'completed' => $todo->completed, 'todo' => $todo->todo, 'editing' => false]
+		);
 	}
 
 	public function render(string $todo, bool $completed, int $key, bool $editing = false)
 	{
-		return <<<HTML
-<li class="{{$this->classNames(compact('completed', 'editing'))}}">
-	<form hx-patch="/api/todo/{{$key}}">
-		<div class="view">
-			<input type="hidden" name="completed" value="{{$completed}}">
-			<input class="toggle" type="checkbox" {$this->checked($completed)} hx-post="/api/todo/{{$key}}/toggle">
-			<label hx-trigger="dblclick" hx-post="/api/todo/{{$key}}/edit">{{$todo}}</label>
-			<button class="destroy" hx-delete="/api/todo/{{$key}}" type="button"></button>
-		</div>
-		<input name="todo" class="edit" value="{{$todo}}">
-	</form>
-</li>
-HTML;
+		$this->begin();
+		?>
+		<li class="<?= $this->classNames(compact('completed', 'editing')) ?>">
+			<form hx-patch="/api/todo/{<?= $key ?>}">
+				<div class="view">
+					<input type="hidden" name="completed" value="{{$completed}}">
+					<input
+							class="toggle"
+							type="checkbox"
+							{<?= $this->checked($completed) ?>}
+							hx-post="/api/todo/{<?= $key ?>}/toggle"
+					>
+					<label hx-trigger="dblclick" hx-post="/api/todo/{<?= $key ?>}/edit">{<?= $todo ?>}</label>
+					<button class="destroy" hx-delete="/api/todo/{<?= $key ?>}" type="button"></button>
+				</div>
+				<input name="todo" class="edit" value="{<?= $todo ?>}">
+			</form>
+		</li>
+		<?php
+		return $this->end();
 	}
 
 	private function checked(bool $completed): string

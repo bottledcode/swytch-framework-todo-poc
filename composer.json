@@ -1,30 +1,42 @@
 {
-    "name": "bottledcode/swytch-framework-todo",
-    "type": "project",
-    "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Bottledcode\\SwytchFrameworkTodo\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "Robert Landers",
-            "email": "landers.robert@gmail.com"
-        }
-    ],
-    "require": {
-        "bottledcode/swytch-framework": "dev-main",
-        "php-di/php-di": "dev-master"
+  "authors": [
+    {
+      "name": "Robert Landers",
+      "email": "landers.robert@gmail.com"
     }
-    ,
-    "require-dev": {
-        "roave/security-advisories": "dev-latest"
-    },
-    "minimum-stability": "dev",
-    "config": {
-        "allow-plugins": {
-            "olvlvl/composer-attribute-collector": true
-        }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Bottledcode\\SwytchFrameworkTodo\\": "src/"
     }
+  },
+  "config": {
+    "allow-plugins": {
+      "olvlvl/composer-attribute-collector": true
+    }
+  },
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "name": "bottledcode/swytch-framework-todo",
+  "replace": {
+    "symfony/polyfill-uuid": "*"
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "branch": "master",
+      "url": "git@github.com:bottledcode/php-rql.git"
+    }
+  ],
+  "require": {
+    "bottledcode/swytch-framework": "dev-main",
+    "php-di/php-di": "dev-master",
+    "monolog/monolog": "^3.3",
+    "mbagnall/php-rql": "dev-master",
+    "ext-uuid": "*"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-latest"
+  },
+  "type": "project"
 }

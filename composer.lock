@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f20e309990609a16ebf9974ab93453ca",
+    "content-hash": "a1f03aab5c4206995111ddb17a2abc65",
     "packages": [
         {
             "name": "bottledcode/swytch-framework",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bottledcode/swytch-framework.git",
-                "reference": "b741c0479d9f2c4df36316b844db3f74b19697f6"
+                "reference": "11f41d71339af9fed90c9648129edd543e4f2639"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bottledcode/swytch-framework/zipball/b741c0479d9f2c4df36316b844db3f74b19697f6",
-                "reference": "b741c0479d9f2c4df36316b844db3f74b19697f6",
+                "url": "https://api.github.com/repos/bottledcode/swytch-framework/zipball/11f41d71339af9fed90c9648129edd543e4f2639",
+                "reference": "11f41d71339af9fed90c9648129edd543e4f2639",
                 "shasum": ""
             },
             "require": {
@@ -47,6 +47,9 @@
                 "phpstan/phpstan": "^1.9",
                 "roave/security-advisories": "dev-latest"
             },
+            "suggest": {
+                "monolog/monolog": "For logging"
+            },
             "default-branch": true,
             "type": "library",
             "autoload": {
@@ -69,7 +72,7 @@
                 "issues": "https://github.com/bottledcode/swytch-framework/issues",
                 "source": "https://github.com/bottledcode/swytch-framework/tree/main"
             },
-            "time": "2023-02-20T20:20:30+00:00"
+            "time": "2023-02-23T21:40:42+00:00"
         },
         {
             "name": "gettext/gettext",
@@ -299,12 +302,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-escaper.git",
-                "reference": "b2e8d9dda6d9ba1d0115e3fb5e02cce33c745d30"
+                "reference": "78f9a8f1d122a19bae00805aa8cd059b74c0dcea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-escaper/zipball/b2e8d9dda6d9ba1d0115e3fb5e02cce33c745d30",
-                "reference": "b2e8d9dda6d9ba1d0115e3fb5e02cce33c745d30",
+                "url": "https://api.github.com/repos/laminas/laminas-escaper/zipball/78f9a8f1d122a19bae00805aa8cd059b74c0dcea",
+                "reference": "78f9a8f1d122a19bae00805aa8cd059b74c0dcea",
                 "shasum": ""
             },
             "require": {
@@ -354,7 +357,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2023-02-05T01:49:58+00:00"
+            "time": "2023-02-22T00:51:51+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -484,6 +487,183 @@
                 "source": "https://github.com/Masterminds/html5-php/tree/master"
             },
             "time": "2023-01-19T12:38:17+00:00"
+        },
+        {
+            "name": "mbagnall/php-rql",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bottledcode/php-rql.git",
+                "reference": "ce72f7c743c1988e01fef635fc7002a76a4079d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bottledcode/php-rql/zipball/ce72f7c743c1988e01fef635fc7002a76a4079d5",
+                "reference": "ce72f7c743c1988e01fef635fc7002a76a4079d5",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-openssl": "*",
+                "php": ">=8.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~9.5",
+                "squizlabs/php_codesniffer": "~3.7"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "rdb/rdb.php"
+                ],
+                "psr-4": {
+                    "r\\": "rdb/",
+                    "r\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "tests/phpunit.sh"
+                ]
+            },
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Mewes",
+                    "email": "danielmewes@onlinehome.de",
+                    "homepage": "http://dmewes.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Michael Bagnall",
+                    "email": "michael@bagnall.io",
+                    "homepage": "http://bagnall.io",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Rob Landers",
+                    "email": "landers.robert@gmail.com",
+                    "homepage": "https://withinboredom.info",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "A PHP client driver for the RethinkDB query language (ReQL)",
+            "homepage": "http://danielmewes.github.io/php-rql/",
+            "keywords": [
+                "database",
+                "driver",
+                "reql",
+                "rethinkdb"
+            ],
+            "support": {
+                "source": "https://github.com/bottledcode/php-rql/tree/master"
+            },
+            "time": "2023-02-20T16:16:21+00:00"
+        },
+        {
+            "name": "monolog/monolog",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Seldaek/monolog.git",
+                "reference": "d3d495b742cacf9c0af87867bf87dab2fc591e68"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/d3d495b742cacf9c0af87867bf87dab2fc591e68",
+                "reference": "d3d495b742cacf9c0af87867bf87dab2fc591e68",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "psr/log": "^2.0 || ^3.0"
+            },
+            "provide": {
+                "psr/log-implementation": "3.0.0"
+            },
+            "require-dev": {
+                "aws/aws-sdk-php": "^3.0",
+                "doctrine/couchdb": "~1.0@dev",
+                "elasticsearch/elasticsearch": "^7 || ^8",
+                "ext-json": "*",
+                "graylog2/gelf-php": "^1.4.2 || ^2@dev",
+                "guzzlehttp/guzzle": "^7.4.5",
+                "guzzlehttp/psr7": "^2.2",
+                "mongodb/mongodb": "^1.8",
+                "php-amqplib/php-amqplib": "~2.4 || ^3",
+                "phpstan/phpstan": "^1.9",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-strict-rules": "^1.4",
+                "phpunit/phpunit": "^9.5.26",
+                "predis/predis": "^1.1 || ^2",
+                "ruflin/elastica": "^7",
+                "symfony/mailer": "^5.4 || ^6",
+                "symfony/mime": "^5.4 || ^6"
+            },
+            "suggest": {
+                "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
+                "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
+                "elasticsearch/elasticsearch": "Allow sending log messages to an Elasticsearch server via official client",
+                "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
+                "ext-curl": "Required to send log messages using the IFTTTHandler, the LogglyHandler, the SendGridHandler, the SlackWebhookHandler or the TelegramBotHandler",
+                "ext-mbstring": "Allow to work properly with unicode symbols",
+                "ext-mongodb": "Allow sending log messages to a MongoDB server (via driver)",
+                "ext-openssl": "Required to send log messages using SSL",
+                "ext-sockets": "Allow sending log messages to a Syslog server (via UDP driver)",
+                "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
+                "mongodb/mongodb": "Allow sending log messages to a MongoDB server (via library)",
+                "php-amqplib/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib",
+                "rollbar/rollbar": "Allow sending log messages to Rollbar",
+                "ruflin/elastica": "Allow sending log messages to an Elastic Search server"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Monolog\\": "src/Monolog"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "homepage": "https://seld.be"
+                }
+            ],
+            "description": "Sends your logs to files, sockets, inboxes, databases and various web services",
+            "homepage": "https://github.com/Seldaek/monolog",
+            "keywords": [
+                "log",
+                "logging",
+                "psr-3"
+            ],
+            "support": {
+                "issues": "https://github.com/Seldaek/monolog/issues",
+                "source": "https://github.com/Seldaek/monolog/tree/main"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/Seldaek",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/monolog/monolog",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2023-02-20T12:31:07+00:00"
         },
         {
             "name": "olvlvl/composer-attribute-collector",
@@ -724,6 +904,57 @@
             "time": "2021-11-05T16:47:00+00:00"
         },
         {
+            "name": "psr/log",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/log.git",
+                "reference": "fe5ea303b0887d5caefd3d431c3e61ad47037001"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/fe5ea303b0887d5caefd3d431c3e61ad47037001",
+                "reference": "fe5ea303b0887d5caefd3d431c3e61ad47037001",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Log\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "https://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "homepage": "https://github.com/php-fig/log",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "support": {
+                "source": "https://github.com/php-fig/log/tree/3.0.0"
+            },
+            "time": "2021-07-14T16:46:02+00:00"
+        },
+        {
             "name": "symfony/deprecation-contracts",
             "version": "dev-main",
             "source": {
@@ -877,12 +1108,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/property-info.git",
-                "reference": "6aaa650f5a1f30fae698ad437476517fcc51f959"
+                "reference": "26bafa33dc59668b46b9b546eff5c98cd00dc514"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/property-info/zipball/6aaa650f5a1f30fae698ad437476517fcc51f959",
-                "reference": "6aaa650f5a1f30fae698ad437476517fcc51f959",
+                "url": "https://api.github.com/repos/symfony/property-info/zipball/26bafa33dc59668b46b9b546eff5c98cd00dc514",
+                "reference": "26bafa33dc59668b46b9b546eff5c98cd00dc514",
                 "shasum": ""
             },
             "require": {
@@ -958,7 +1189,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-14T09:04:20+00:00"
+            "time": "2023-02-21T18:48:11+00:00"
         },
         {
             "name": "symfony/serializer",
@@ -966,12 +1197,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/serializer.git",
-                "reference": "fc9215db3bd66b529d8e64e94b013bd7bbeeccb3"
+                "reference": "e1e286707fe3576a43f366476eee516ce4def07a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/serializer/zipball/fc9215db3bd66b529d8e64e94b013bd7bbeeccb3",
-                "reference": "fc9215db3bd66b529d8e64e94b013bd7bbeeccb3",
+                "url": "https://api.github.com/repos/symfony/serializer/zipball/e1e286707fe3576a43f366476eee516ce4def07a",
+                "reference": "e1e286707fe3576a43f366476eee516ce4def07a",
                 "shasum": ""
             },
             "require": {
@@ -1059,7 +1290,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-14T09:04:20+00:00"
+            "time": "2023-02-23T17:06:36+00:00"
         },
         {
             "name": "symfony/string",
@@ -1067,12 +1298,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "6515bacc98212164f10db4371fa70ee7b8c70b80"
+                "reference": "d5031e3631c5505da1e611fea440d5e0cecf856f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/6515bacc98212164f10db4371fa70ee7b8c70b80",
-                "reference": "6515bacc98212164f10db4371fa70ee7b8c70b80",
+                "url": "https://api.github.com/repos/symfony/string/zipball/d5031e3631c5505da1e611fea440d5e0cecf856f",
+                "reference": "d5031e3631c5505da1e611fea440d5e0cecf856f",
                 "shasum": ""
             },
             "require": {
@@ -1145,7 +1376,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-14T09:04:20+00:00"
+            "time": "2023-02-22T20:14:08+00:00"
         }
     ],
     "packages-dev": [
@@ -1155,12 +1386,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "9206ad5e9490993f471ef1503f630afd7a849170"
+                "reference": "4f70739df3a6062798a1a3a4796904438053fbed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/9206ad5e9490993f471ef1503f630afd7a849170",
-                "reference": "9206ad5e9490993f471ef1503f630afd7a849170",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/4f70739df3a6062798a1a3a4796904438053fbed",
+                "reference": "4f70739df3a6062798a1a3a4796904438053fbed",
                 "shasum": ""
             },
             "conflict": {
@@ -1397,6 +1628,7 @@
                 "magento/magento1ee": ">=1,<1.14.4.3",
                 "magento/product-community-edition": ">=2,<2.2.10|>=2.3,<2.3.2-p.2",
                 "maikuolan/phpmussel": ">=1,<1.6",
+                "mantisbt/mantisbt": "<=2.25.5",
                 "marcwillmann/turn": "<0.3.3",
                 "matyhtf/framework": "<3.0.6",
                 "mautic/core": "<4.3|= 2.13.1",
@@ -1475,6 +1707,7 @@
                 "phpxmlrpc/phpxmlrpc": "<4.9.2",
                 "pimcore/data-hub": "<1.2.4",
                 "pimcore/pimcore": "<10.5.17",
+                "pixelfed/pixelfed": "<=0.11.4",
                 "pocketmine/bedrock-protocol": "<8.0.2",
                 "pocketmine/pocketmine-mp": "<4.12.5|>= 4.0.0-BETA5, < 4.4.2",
                 "pressbooks/pressbooks": "<5.18",
@@ -1730,7 +1963,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-17T21:04:14+00:00"
+            "time": "2023-02-23T20:04:28+00:00"
         }
     ],
     "aliases": [],
@@ -1738,11 +1971,14 @@
     "stability-flags": {
         "bottledcode/swytch-framework": 20,
         "php-di/php-di": 20,
+        "mbagnall/php-rql": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "ext-uuid": "*"
+    },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
 }

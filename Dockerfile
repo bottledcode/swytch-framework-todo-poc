@@ -1,12 +1,20 @@
-FROM dunglas/frankenphp AS server
+FROM dunglas/frankenphp:latest AS build
 
-RUN install-php-extensions @composer intl
+RUN install-php-extensions @composer dom intl mbstring sodium zip uuid
 
 COPY composer.json composer.lock ./
 
-RUN COMPOSER_ALLOW_SUPERUSER=1 composer install -o --no-dev -n # && \
-    #echo xdebug.client_host=172.22.192.1 >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN composer install --no-dev -o
 
-COPY src public ./
+COPY public public
+COPY src src
 
-ENV SERVER_PORT=443 SERVER_NAME=:80
+FROM dunglas/frankenphp:latest AS dev
+
+RUN install-php-extensions xdebug @composer dom intl mbstring sodium zip uuid && \
+    echo "xdebug.mode = debug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+    echo "xdebug.log = /tmp/xdebug.log" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
+FROM build AS prod
+
+RUN install-php-extensions opcache
