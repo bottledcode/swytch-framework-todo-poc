@@ -88,3 +88,7 @@ fabric.properties
 # Ignore DevSpace cache and log folder
 .devspace/
 *.values.yaml
+
+
+# Ignore DevSpace cache and log folder
+.devspace/

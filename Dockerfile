@@ -9,6 +9,8 @@ RUN composer install --no-dev -o
 COPY public public
 COPY src src
 
+RUN composer dump -o --apcu
+
 FROM dunglas/frankenphp:latest AS dev
 
 RUN install-php-extensions xdebug @composer dom intl mbstring sodium zip uuid && \
@@ -18,3 +20,6 @@ RUN install-php-extensions xdebug @composer dom intl mbstring sodium zip uuid &&
 FROM build AS prod
 
 RUN install-php-extensions opcache
+
+RUN mv $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini && \
+	echo "opcache.jit_buffer_size=100M" >> $PHP_INI_DIR/php.ini

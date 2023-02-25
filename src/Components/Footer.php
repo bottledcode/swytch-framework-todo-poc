@@ -10,7 +10,7 @@ use Bottledcode\SwytchFramework\Template\Traits\RegularPHP;
 use Bottledcode\SwytchFrameworkTodo\Repository\TodoRepository;
 
 #[Component('Footer')]
-class Footer
+readonly class Footer
 {
 	use Htmx;
 	use FancyClasses;
@@ -30,6 +30,7 @@ class Footer
 			<li><a href="/active" class="<?= $filter === 'active' ? 'selected' : '' ?>">Active</a></li>
 			<li><a href="/completed" class="<?= $filter === 'completed' ? 'selected' : '' ?>">Completed</a></li>
 		</ul>
+		TIMING_PLACEHOLDER
 		<?php
 		return $this->end();
 	}

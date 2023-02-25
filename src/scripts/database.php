@@ -39,7 +39,11 @@ try {
 echo "Connected...\n";
 
 $tables = [
-	'todos' => ['userId' => [], 'userIdAndCompleted' => ['options' => [row('userId'), row('completed')]]],
+	'todos' => [
+		'userId' => [],
+		'userIdAndCompleted' => ['options' => [row('userId'), row('completed')]],
+		'userIdId' => ['options' => [row('userId'), row('id')]]
+	],
 ];
 
 doForSuccess(checkDatabaseExists(DATABASE), noop(...), createDatabase(DATABASE));

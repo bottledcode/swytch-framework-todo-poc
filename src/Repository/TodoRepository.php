@@ -3,56 +3,106 @@
 namespace Bottledcode\SwytchFrameworkTodo\Repository;
 
 use Bottledcode\SwytchFrameworkTodo\Models\TodoItem;
+use r\Connection;
+use r\Cursor;
+use r\Options\GetAllOptions;
 use Symfony\Component\Serializer\Serializer;
 
-class TodoRepository {
-	/** @var TodoItem[] */
-	private array $todos = [];
+use function r\row;
+use function r\table;
+use function r\uuid;
 
-	private const FILENAME = '/tmp/todosv2.json';
+readonly class TodoRepository
+{
+	private string $userId;
 
-	public function __construct(Serializer $serializer) {
-		if(!file_exists(self::FILENAME)) {
-			file_put_contents(self::FILENAME, '[]');
+	public function __construct(private Serializer $serializer, private Connection $connection)
+	{
+		$this->userId = explode(
+			':',
+			$_SERVER['HTTP_X_AUTH_REQUEST_USER'] ?? throw new \LogicException('No user id detected'),
+			2
+		)[0];
+	}
+
+	public function getTodos(): array
+	{
+		$results = table('todos')
+			->getAll($this->userId, new GetAllOptions(index: 'userId'))
+			->orderBy('created')
+			->run($this->connection);
+		return $this->denormalize($results);
+	}
+
+	private function denormalize(array|Cursor $items): array
+	{
+		$return = [];
+		foreach ($items as $result) {
+			$return[] = $this->serializer->denormalize($result, TodoItem::class);
 		}
-		$todos = json_decode(file_get_contents(self::FILENAME), true);
-		foreach($todos as $todo) {
-			$this->todos[] = $serializer->denormalize($todo, TodoItem::class);
+		return $return;
+	}
+
+	public function getCompleted(bool $isCompleted): array
+	{
+		$result = table('todos')
+			->getAll([$this->userId, $isCompleted], new GetAllOptions(index: 'userIdAndCompleted'))
+			->orderBy('created')
+			->run($this->connection);
+		return $this->denormalize($result);
+	}
+
+	public function add(TodoItem $todo): int
+	{
+		$actual = (array)$todo;
+		$actual['userId'] = $this->userId;
+		table('todos')->insert($actual)->run($this->connection);
+		return table('todos')
+			->getAll($this->userId, new GetAllOptions(index: 'userId'))
+			->count()
+			->run($this->connection);
+	}
+
+	public function count(): int
+	{
+		return table('todos')
+			->getAll($this->userId, new GetAllOptions(index: 'userId'))
+			->count()
+			->run($this->connection);
+	}
+
+	public function remove(string $id): void
+	{
+		table('todos')
+			->getAll([$this->userId, $id], new GetAllOptions(index: 'userIdId'))
+			->delete()
+			->run($this->connection);
+	}
+
+	public function get(string $id): TodoItem|null
+	{
+		$result = table('todos')
+			->getAll([$this->userId, $id], new GetAllOptions(index: 'userIdId'))
+			->run($this->connection);
+		$result = $this->denormalize($result)[0] ?? null;
+		if ($result !== null && $result->userId !== $this->userId) {
+			throw new \LogicException('User does not own this todo');
 		}
+		return $result;
 	}
 
-	public function getTodos(): array {
-		return $this->todos;
+	public function update(TodoItem $todo): void
+	{
+		$actual = (array)$todo;
+		$actual['userId'] = $this->userId;
+		table('todos')
+			->getAll([$this->userId, $todo->id], new GetAllOptions('userIdId'))
+			->update($actual)
+			->run($this->connection);
 	}
 
-	public function getCompleted(bool $isCompleted): array {
-		return array_filter($this->todos, fn(TodoItem $todo) => $todo->completed === $isCompleted);
-	}
-
-	public function add(TodoItem $todo): int {
-		$this->todos[] = $todo;
-		return count($this->todos) - 1;
-	}
-
-	public function save(): void {
-		file_put_contents(self::FILENAME, json_encode($this->todos));
-	}
-
-	public function remove(int $index): TodoItem|null {
-		$deleted = $this->todos[$index] ?? null;
-		unset($this->todos[$index]);
-		return $deleted;
-	}
-
-	public function count(): int {
-		return count($this->todos);
-	}
-
-	public function update(int $index, TodoItem $todo): void {
-		$this->todos[$index] = $todo;
-	}
-
-	public function get(int $id): TodoItem|null {
-		return $this->todos[$id] ?? null;
+	public function newId(): string
+	{
+		return uuid()->run($this->connection);
 	}
 }

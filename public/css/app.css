@@ -80,6 +80,10 @@ body {
     text-rendering: optimizeLegibility;
 }
 
+.timing {
+    float: right;
+}
+
 .new-todo,
 .edit {
     position: relative;

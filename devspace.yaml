@@ -1,0 +1,92 @@
+version: v2beta1
+name: swytch-framework-todo-poc
+
+# This is a list of `pipelines` that DevSpace can execute (you can define your own)
+pipelines:
+  dev:
+    run: |-
+      loft wakeup image-builder
+      run_dependencies --all       # 1. Deploy any projects this project needs (see "dependencies")
+      ensure_pull_secrets --all    # 2. Ensure pull secrets
+      create_deployments --all     # 3. Deploy Helm charts and manifests specfied as "deployments"
+      start_dev app                # 4. Start dev mode "app" (see "dev" section)
+  deploy:
+    run: |-
+      loft wakeup image-builder
+      run_dependencies --all
+      ensure_pull_secrets --all
+      build_images app --sequential
+      devspace reset pods
+      create_deployments --all
+  build:
+    run: |-
+      loft wakeup image-builder
+      build_images --all --sequential
+
+# This is a list of `images` that DevSpace can build for this project
+# We recommend to skip image building during development (devspace dev) as much as possible
+images:
+  app:
+    image: registry.bottled.codes/swytch/todo-app
+    dockerfile: ./Dockerfile
+    target: prod
+    buildKit:
+      inCluster:
+        noLoad: true
+        name: builder
+        namespace: image-builder
+
+# This is a list of `deployments` that DevSpace can create for this project
+deployments:
+  swytch-todos:
+    updateImageTags: true
+    helm:
+      # We are deploying this project with the Helm chart you provided
+      chart:
+        name: ./charts/deployment
+      # Under `values` we can define the values for this Helm chart used during `helm install/upgrade`
+      # You may also use `valuesFiles` to load values from files, e.g. valuesFiles: ["values.yaml"]
+      valuesFiles:
+        - deployment.values.yaml
+        # This is a list of `dev` containers that are based on the containers created by your deployments
+dev:
+  app:
+    # Search for the container that runs this image
+    labelSelector:
+      app.kubernetes.io/name: swytch-todos
+    # Replace the container image with this dev-optimized image (allows to skip image building during development)
+    devImage: registry.bottled.codes/swytch/todos
+    # Sync files between the local filesystem and the development container
+    sync:
+      - path: ./
+    reversePorts:
+      - bindAddress: '9003'
+        port: '9003'
+      # Open a terminal and use the following command to start it
+    terminal:
+      command: ./devspace_start.sh
+    # Make the following commands from my local machine available inside the dev container
+    proxyCommands:
+      - command: devspace
+      - command: kubectl
+      - command: helm
+      - gitCredentials: true
+      - command: composer
+    # Open the following URLs once they return an HTTP status code other than 502 or 503
+    open:
+      - url: https://todos.getswytch.com
+
+# Use the `commands` section to define repeatable dev workflows for this project 
+commands:
+  migrate-db:
+    command: |-
+      echo 'This is a cross-platform, shared command that can be used to codify any kind of dev task.'
+      echo 'Anyone using this project can invoke it via "devspace run migrate-db"'
+
+# Define dependencies to other projects with a devspace.yaml
+# dependencies:
+#   api:
+#     git: https://...  # Git-based dependencies
+#     tag: v1.0.0
+#   ui:
+#     path: ./ui        # Path-based dependencies (for monorepos)

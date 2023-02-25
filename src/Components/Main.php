@@ -11,7 +11,7 @@ use Bottledcode\SwytchFramework\Template\Traits\RegularPHP;
 use Bottledcode\SwytchFrameworkTodo\Repository\TodoRepository;
 
 #[Component('Main')]
-class Main
+readonly class Main
 {
 	use Htmx;
 	use RegularPHP;
@@ -23,12 +23,14 @@ class Main
 	#[Route(Method::POST, '/api/todos/complete')]
 	public function markAllCompleted(string $target_id, array $state): string
 	{
+		/**
+		 * @var \Bottledcode\SwytchFrameworkTodo\Models\TodoItem $todo
+		 */
 		foreach ($this->todos->getTodos() as $id => $todo) {
-			$this->todos->update($id, new \Bottledcode\SwytchFrameworkTodo\Models\TodoItem($todo->todo, true));
+			$this->todos->update($todo->with(completed: true));
 		}
-		$this->todos->save();
 
-		return $this->rerender($target_id, $state);
+		return $this->rerender($target_id, $state, prependHtml: "<Counter hx-swap-oob='true' id='counter' />");
 	}
 
 	public function render(string $filter)
@@ -40,7 +42,7 @@ class Main
 			default => $this->todos->getTodos()
 		};
 		foreach ($todos as $key => $todo) {
-			$todoList .= "<TodoItem todo='{{$todo->todo}}' completed='{{$todo->completed}}' key='{{$key}}'/>\n";
+			$todoList .= "<TodoItem todo='{{$todo->todo}}' completed='{{$todo->completed}}' key='{{$todo->id}}'/>\n";
 		}
 
 		$allCompleted = count($this->todos->getCompleted(false)) === 0 ? 'checked' : '';

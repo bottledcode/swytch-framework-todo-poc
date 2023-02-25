@@ -1,15 +1,18 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "deployment.fullname" . }}
+  name: swytch-todos
   labels:
-    {{- include "deployment.labels" . | nindent 4 }}
+    helm.sh/chart: {{ include "deployment.chart" . }}
+    app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/name: swytch-todos
 spec:
-  type: {{ .Values.service.type }}
+  type: ClusterIP
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
+    - targetPort: http
+      port: 80
       protocol: TCP
       name: http
   selector:
-    {{- include "deployment.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/name: swytch-todos

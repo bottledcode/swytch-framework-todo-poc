@@ -45,7 +45,7 @@ $container->addDefinitions([
 			get(ArrayDenormalizer::class),
 
 			get(BackedEnumNormalizer::class),
-			get(DateTimeNormalizer::class),
+			//get(DateTimeNormalizer::class),
 			get(ObjectNormalizer::class),
 		]),
 	Connection::class => fn() => new Connection(
@@ -118,20 +118,22 @@ try {
 }
 if ($result !== null) {
 	header('Server-Timing: proc;dur=' . (microtime(true) - $requestStart));
-	$result = str_replace(
-		'</html>',
-		'<span class="timing">page generated in: ' . number_format(
-			round(
-				(microtime(
-						true
-					) - $requestStart) * 1000,
-				2
-			),
+	$responseMs = number_format(
+		round(
+			(microtime(true) - $requestStart) * 1000,
 			2
-		) . ' milliseconds</span></html>',
+		),
+		2
+	);
+	$newResult = str_replace(
+		'TIMING_PLACEHOLDER',
+		'<span id="timing" class="timing">' . $responseMs . ' milliseconds</span></html>',
 		$result
 	);
-	echo $result;
+	if (($_SERVER['HTTP_HX_REQUEST'] ?? false) && $newResult === $result) {
+		$newResult = '<span hx-swap-oob="true" id="timing" class="timing">' . $responseMs . ' milliseconds</span>' . $newResult;
+	}
+	echo $newResult;
 	die();
 }
 header('Server-Timing: proc;dur=' . (microtime(true) - $requestStart));

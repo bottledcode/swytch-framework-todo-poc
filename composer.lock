@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bottledcode/swytch-framework.git",
-                "reference": "11f41d71339af9fed90c9648129edd543e4f2639"
+                "reference": "b3b7bf98716d79137de1a1051fd3fef41762a7ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bottledcode/swytch-framework/zipball/11f41d71339af9fed90c9648129edd543e4f2639",
-                "reference": "11f41d71339af9fed90c9648129edd543e4f2639",
+                "url": "https://api.github.com/repos/bottledcode/swytch-framework/zipball/b3b7bf98716d79137de1a1051fd3fef41762a7ef",
+                "reference": "b3b7bf98716d79137de1a1051fd3fef41762a7ef",
                 "shasum": ""
             },
             "require": {
@@ -72,7 +72,7 @@
                 "issues": "https://github.com/bottledcode/swytch-framework/issues",
                 "source": "https://github.com/bottledcode/swytch-framework/tree/main"
             },
-            "time": "2023-02-23T21:40:42+00:00"
+            "time": "2023-02-25T13:55:01+00:00"
         },
         {
             "name": "gettext/gettext",
@@ -302,12 +302,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-escaper.git",
-                "reference": "78f9a8f1d122a19bae00805aa8cd059b74c0dcea"
+                "reference": "369cff3c4f98f29ed6c6b9bf89815eadc945b94d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-escaper/zipball/78f9a8f1d122a19bae00805aa8cd059b74c0dcea",
-                "reference": "78f9a8f1d122a19bae00805aa8cd059b74c0dcea",
+                "url": "https://api.github.com/repos/laminas/laminas-escaper/zipball/369cff3c4f98f29ed6c6b9bf89815eadc945b94d",
+                "reference": "369cff3c4f98f29ed6c6b9bf89815eadc945b94d",
                 "shasum": ""
             },
             "require": {
@@ -357,7 +357,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2023-02-22T00:51:51+00:00"
+            "time": "2023-02-23T01:32:01+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -1197,12 +1197,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/serializer.git",
-                "reference": "e1e286707fe3576a43f366476eee516ce4def07a"
+                "reference": "f1731740d87c1c0f20965dc7cd9e32161c85b85e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/serializer/zipball/e1e286707fe3576a43f366476eee516ce4def07a",
-                "reference": "e1e286707fe3576a43f366476eee516ce4def07a",
+                "url": "https://api.github.com/repos/symfony/serializer/zipball/f1731740d87c1c0f20965dc7cd9e32161c85b85e",
+                "reference": "f1731740d87c1c0f20965dc7cd9e32161c85b85e",
                 "shasum": ""
             },
             "require": {
@@ -1290,7 +1290,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-23T17:06:36+00:00"
+            "time": "2023-02-24T10:44:40+00:00"
         },
         {
             "name": "symfony/string",
@@ -1298,12 +1298,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "d5031e3631c5505da1e611fea440d5e0cecf856f"
+                "reference": "599f0f073afa9866d1d3b16c1ffafa74a69fb3ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/d5031e3631c5505da1e611fea440d5e0cecf856f",
-                "reference": "d5031e3631c5505da1e611fea440d5e0cecf856f",
+                "url": "https://api.github.com/repos/symfony/string/zipball/599f0f073afa9866d1d3b16c1ffafa74a69fb3ce",
+                "reference": "599f0f073afa9866d1d3b16c1ffafa74a69fb3ce",
                 "shasum": ""
             },
             "require": {
@@ -1376,7 +1376,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-22T20:14:08+00:00"
+            "time": "2023-02-24T10:44:40+00:00"
         }
     ],
     "packages-dev": [
@@ -1386,12 +1386,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "4f70739df3a6062798a1a3a4796904438053fbed"
+                "reference": "6bd8aa4cc5a5871008d89e503ac4ae7b69b5ac33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/4f70739df3a6062798a1a3a4796904438053fbed",
-                "reference": "4f70739df3a6062798a1a3a4796904438053fbed",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/6bd8aa4cc5a5871008d89e503ac4ae7b69b5ac33",
+                "reference": "6bd8aa4cc5a5871008d89e503ac4ae7b69b5ac33",
                 "shasum": ""
             },
             "conflict": {
@@ -1535,7 +1535,7 @@
                 "fooman/tcpdf": "<6.2.22",
                 "forkcms/forkcms": "<5.11.1",
                 "fossar/tcpdf-parser": "<6.2.22",
-                "francoisjacquet/rosariosis": "<10.1",
+                "francoisjacquet/rosariosis": "<10.8.2",
                 "friendsofsymfony/oauth2-php": "<1.3",
                 "friendsofsymfony/rest-bundle": ">=1.2,<1.2.2",
                 "friendsofsymfony/user-bundle": ">=1.2,<1.3.5",
@@ -1884,6 +1884,7 @@
                 "wp-cli/wp-cli": "<2.5",
                 "wp-graphql/wp-graphql": "<0.3.5",
                 "wpanel/wpanel4-cms": "<=4.3.1",
+                "wpcloud/wp-stateless": "<3.2",
                 "wwbn/avideo": "<12.4",
                 "xataface/xataface": "<3",
                 "xpressengine/xpressengine": "<3.0.15",
@@ -1963,7 +1964,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-23T20:04:28+00:00"
+            "time": "2023-02-24T17:04:25+00:00"
         }
     ],
     "aliases": [],
