@@ -75,6 +75,7 @@ $container = $container->build();
 set_error_handler(function ($errno, $errstr, $errfile, $errline) use ($container) {
 	if (!(error_reporting() & $errno)) {
 		// This error code is not included in error_reporting
+		$container->get(LoggerInterface::class)->notice('Error suppressed', compact('errno', 'errstr', 'errfile', 'errline'));
 		return;
 	}
 	http_response_code(500);

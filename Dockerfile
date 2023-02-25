@@ -1,13 +1,18 @@
-FROM dunglas/frankenphp:latest AS build
+FROM php:8.2-apache AS build
 
-RUN install-php-extensions @composer dom intl mbstring sodium zip uuid
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 
-COPY composer.json composer.lock ./
+RUN install-php-extensions @composer dom intl mbstring sodium zip uuid opcache
 
-RUN composer install --no-dev -o
+COPY composer.json composer.lock /var/www/
 
-COPY public public
-COPY src src
+WORKDIR /var/www
+
+RUN composer install --no-dev -o && a2enmod rewrite headers expires && \
+    sed -e '/<Directory \/var\/www\/>/,/<\/Directory>/s/AllowOverride None/AllowOverride All/' -i /etc/apache2/apache2.conf
+
+COPY public /var/www/html
+COPY src /var/www/src
 
 RUN composer dump -o --apcu
 
@@ -19,7 +24,6 @@ RUN install-php-extensions xdebug @composer dom intl mbstring sodium zip uuid &&
 
 FROM build AS prod
 
-RUN install-php-extensions opcache
 
 RUN mv $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini && \
 	echo "opcache.jit_buffer_size=100M" >> $PHP_INI_DIR/php.ini

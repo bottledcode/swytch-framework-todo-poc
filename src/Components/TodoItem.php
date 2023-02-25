@@ -36,7 +36,7 @@ readonly class TodoItem
 		$this->todos->update($new);
 		return $this->rerender(
 			$target_id,
-			[...$state, 'todo' => $previous->todo, 'completed' => !$previous->completed, 'key' => $id],
+			[...$state, 'completed' => !$previous->completed, 'key' => $id],
 			prependHtml: "<Counter hx-swap-oob='true' id='counter' />"
 		);
 	}
@@ -74,7 +74,7 @@ readonly class TodoItem
 		<li class="<?= $this->classNames(compact('completed', 'editing')) ?>">
 			<form hx-patch="/api/todo/{<?= $key ?>}">
 				<div class="view">
-					<input type="hidden" name="completed" value="{{$completed}}">
+					<input type="hidden" name="completed" value="{<?= $completed ?>}">
 					<input
 							class="toggle"
 							type="checkbox"

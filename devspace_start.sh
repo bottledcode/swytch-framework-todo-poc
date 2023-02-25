@@ -53,6 +53,11 @@ This is how you can work with it:
 - Some ports will be forwarded, so you can access this container via localhost
 "
 
+function xdebug() {
+  install-php-extensions xdebug
+  echo "xdebug.mode = debug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+}
+
 # Set terminal prompt
 export PS1="\[${COLOR_BLUE}\]devspace\[${COLOR_RESET}\] ./\W \[${COLOR_BLUE}\]\\$\[${COLOR_RESET}\] "
 if [ -z "$BASH" ]; then export PS1="$ "; fi

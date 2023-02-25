@@ -20,7 +20,7 @@ readonly class TodoRepository
 	{
 		$this->userId = explode(
 			':',
-			$_SERVER['HTTP_X_AUTH_REQUEST_USER'] ?? throw new \LogicException('No user id detected'),
+			$_SERVER['HTTP_X_AUTH_REQUEST_USER'] ?: throw new \LogicException('No user id detected'),
 			2
 		)[0];
 	}

@@ -19,6 +19,11 @@ spec:
     - secretName: auth-test-tls
       hosts:
         - todos.getswytch.com
+  defaultBackend:
+    service:
+      name: swytch-todos
+      port:
+        number: 80
   rules:
     - host: todos.getswytch.com
       http:
