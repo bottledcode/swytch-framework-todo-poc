@@ -67,6 +67,10 @@ body {
     color: #e6e6e6;
 }
 
+.destroyed {
+    border: none;
+}
+
 .todoapp h1 {
     position: absolute;
     top: -155px;

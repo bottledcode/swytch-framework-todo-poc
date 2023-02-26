@@ -23,11 +23,13 @@ readonly class Main
 	#[Route(Method::POST, '/api/todos/complete')]
 	public function markAllCompleted(string $target_id, array $state): string
 	{
+		$complete = count($this->todos->getCompleted(false)) === 0;
+
 		/**
 		 * @var \Bottledcode\SwytchFrameworkTodo\Models\TodoItem $todo
 		 */
 		foreach ($this->todos->getTodos() as $id => $todo) {
-			$this->todos->update($todo->with(completed: true));
+			$this->todos->update($todo->with(completed: !$complete));
 		}
 
 		return $this->rerender($target_id, $state, prependHtml: "<Counter hx-swap-oob='true' id='counter' />");
@@ -49,7 +51,7 @@ readonly class Main
 
 		$this->begin();
 		?>
-		<section class="main">
+		<section class="main" hx-sync="this:queue all">
 			<form hx-post="/api/todos/complete">
 				<input hx-post="/api/todos/complete" id="toggle-all" class="toggle-all" type="checkbox" <?= $allCompleted ?>>
 				<label for="toggle-all">{<?= __('Mark all as complete') ?>}</label>

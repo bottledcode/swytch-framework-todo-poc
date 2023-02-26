@@ -1,6 +1,9 @@
 #!/bin/bash
 set +e  # Continue on errors
 
+install-php-extensions xdebug
+echo "xdebug.mode = debug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
 frankenphp start --config /etc/Caddyfile
 
 sleep 1

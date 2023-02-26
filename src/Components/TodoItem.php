@@ -36,7 +36,7 @@ readonly class TodoItem
 		$this->todos->update($new);
 		return $this->rerender(
 			$target_id,
-			[...$state, 'completed' => !$previous->completed, 'key' => $id],
+			[...$state, 'completed' => !$previous->completed],
 			prependHtml: "<Counter hx-swap-oob='true' id='counter' />"
 		);
 	}
@@ -47,7 +47,7 @@ readonly class TodoItem
 		$this->todos->remove($id);
 		$this->retarget('#' . $target_id);
 		$this->reswap(HtmxSwap::OuterHtml);
-		return $this->html("<Counter hx-swap-oob='true' id='counter' /><li class='destroyed'></li>");
+		return $this->html("<Counter hx-swap-oob='true' id='counter' /><li style='border: none' class='destroyed'></li>");
 	}
 
 	#[Route(Method::POST, '/api/todo/:id/edit')]
@@ -57,13 +57,13 @@ readonly class TodoItem
 	}
 
 	#[Route(Method::PATCH, '/api/todo/:id')]
-	public function updateTodo(string $target_id, string $id, array $state, TodoItemModel $todo): string
+	public function updateTodo(string $target_id, array $state, string $todo, bool $completed, string $id): string
 	{
-		$new = $todo->with(todo: $todo->todo);
+		$new = $this->todos->get($id)->with(todo: $todo, completed: $completed);
 		$this->todos->update($new);
 		return $this->rerender(
 			$target_id,
-			[...$state, 'completed' => $todo->completed, 'todo' => $todo->todo, 'editing' => false]
+			[...$state, 'completed' => $new->completed, 'todo' => $new->todo, 'editing' => false]
 		);
 	}
 
@@ -84,7 +84,7 @@ readonly class TodoItem
 					<label hx-trigger="dblclick" hx-post="/api/todo/{<?= $key ?>}/edit">{<?= $todo ?>}</label>
 					<button class="destroy" hx-delete="/api/todo/{<?= $key ?>}" type="button"></button>
 				</div>
-				<input name="todo" class="edit" value="{<?= $todo ?>}">
+				<input name="todo" <?= $editing ? 'autofocus' : '' ?> <?= $editing ? 'hx-trigger="blur"' : '' ?> class="edit" value="{<?= $todo ?>}">
 			</form>
 		</li>
 		<?php
