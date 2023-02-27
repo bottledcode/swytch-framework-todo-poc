@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a1f03aab5c4206995111ddb17a2abc65",
+    "content-hash": "01142d376f799b50b78964974a333e9d",
     "packages": [
         {
             "name": "bottledcode/swytch-framework",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bottledcode/swytch-framework.git",
-                "reference": "16b3af9cbb24998ec9b7b498622ca1292b7644e6"
+                "reference": "12f7aac57e4470a544fe2739fb9d62b53a3ae1f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bottledcode/swytch-framework/zipball/16b3af9cbb24998ec9b7b498622ca1292b7644e6",
-                "reference": "16b3af9cbb24998ec9b7b498622ca1292b7644e6",
+                "url": "https://api.github.com/repos/bottledcode/swytch-framework/zipball/12f7aac57e4470a544fe2739fb9d62b53a3ae1f3",
+                "reference": "12f7aac57e4470a544fe2739fb9d62b53a3ae1f3",
                 "shasum": ""
             },
             "require": {
@@ -31,24 +31,21 @@
                 "masterminds/html5": "^2.7",
                 "olvlvl/composer-attribute-collector": "^1.1",
                 "php": ">=8.2",
-                "psr/container": "2.0.2",
-                "symfony/property-access": "^6.2",
-                "symfony/serializer": "^6.2"
-            },
-            "replace": {
-                "symfony/polyfill-ctype": "*",
-                "symfony/polyfill-intl-grapheme": "*",
-                "symfony/polyfill-intl-normalizer": "*",
-                "symfony/polyfill-mbstring": "*",
-                "symfony/polyfill-php80": "*"
+                "psr/container": "2.0.2"
             },
             "require-dev": {
+                "infection/infection": "^0.26.19",
                 "pestphp/pest": "^1.22",
+                "pestphp/pest-plugin-mock": "^1.0",
+                "php-di/php-di": "^7.0",
                 "phpstan/phpstan": "^1.9",
-                "roave/security-advisories": "dev-latest"
+                "roave/security-advisories": "dev-latest",
+                "spatie/pest-plugin-snapshots": "^1.1"
             },
             "suggest": {
-                "monolog/monolog": "For logging"
+                "monolog/monolog": "For logging",
+                "php-di/php-di": "For dependency injection",
+                "symfony/serializer": "For state validation"
             },
             "default-branch": true,
             "type": "library",
@@ -67,12 +64,12 @@
                     "email": "landers.robert@gmail.com"
                 }
             ],
-            "description": "A high performance framework for microservices",
+            "description": "A PHP framework for building web applications",
             "support": {
                 "issues": "https://github.com/bottledcode/swytch-framework/issues",
                 "source": "https://github.com/bottledcode/swytch-framework/tree/main"
             },
-            "time": "2023-02-26T10:56:03+00:00"
+            "time": "2023-02-26T22:46:42+00:00"
         },
         {
             "name": "gettext/gettext",
@@ -302,12 +299,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-escaper.git",
-                "reference": "369cff3c4f98f29ed6c6b9bf89815eadc945b94d"
+                "reference": "38519689970c381ce5076fc104d53efbeabb03fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-escaper/zipball/369cff3c4f98f29ed6c6b9bf89815eadc945b94d",
-                "reference": "369cff3c4f98f29ed6c6b9bf89815eadc945b94d",
+                "url": "https://api.github.com/repos/laminas/laminas-escaper/zipball/38519689970c381ce5076fc104d53efbeabb03fa",
+                "reference": "38519689970c381ce5076fc104d53efbeabb03fa",
                 "shasum": ""
             },
             "require": {
@@ -357,7 +354,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2023-02-23T01:32:01+00:00"
+            "time": "2023-02-26T01:54:32+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -1971,8 +1968,10 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "bottledcode/swytch-framework": 20,
-        "php-di/php-di": 20,
         "mbagnall/php-rql": 20,
+        "php-di/php-di": 20,
+        "symfony/property-access": 20,
+        "symfony/serializer": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": false,

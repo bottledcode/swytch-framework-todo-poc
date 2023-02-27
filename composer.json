@@ -19,6 +19,10 @@
   "minimum-stability": "dev",
   "name": "bottledcode/swytch-framework-todo",
   "replace": {
+    "symfony/polyfill-ctype": "*",
+    "symfony/polyfill-intl-grapheme": "*",
+    "symfony/polyfill-intl-normalizer": "*",
+    "symfony/polyfill-mbstring": "*",
     "symfony/polyfill-uuid": "*"
   },
   "repositories": [
@@ -30,10 +34,12 @@
   ],
   "require": {
     "bottledcode/swytch-framework": "dev-main",
-    "php-di/php-di": "dev-master",
-    "monolog/monolog": "^3.3",
+    "ext-uuid": "*",
     "mbagnall/php-rql": "dev-master",
-    "ext-uuid": "*"
+    "monolog/monolog": "^3.3",
+    "php-di/php-di": "dev-master",
+    "symfony/property-access": "6.3.x-dev",
+    "symfony/serializer": "6.3.x-dev"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest"
