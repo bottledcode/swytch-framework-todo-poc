@@ -34,7 +34,7 @@ jobs:
           url: https://kube.bottled.codes
           access-key: ${{ secrets.LOFT_ACCESS_KEY }}
       - name: Inject values
-        run: echo ${{ secrets.DEPLOYMENT_VALUES }} > deployment.values.yaml
+        run: echo "${{ secrets.DEPLOYMENT_VALUES }}" > deployment.values.yaml
       - name: Switch to namespace
         run: loft use space swytch-todos
       - name: Execute
